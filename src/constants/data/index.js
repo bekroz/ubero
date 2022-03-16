@@ -6,7 +6,7 @@ const carListData = [
 	{
 		type: 'UberX',
 		image: uberX,
-		priceMultiplier: 1,
+		priceMultiplier: 1.1,
 	},
 	{
 		type: 'UberBlack',
