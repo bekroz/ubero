@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { Navbar, Map } from '../components';
+import { LocationSelector } from '../components/LocationSelector';
+import style from './style';
 
 function Home() {
 	return (
@@ -12,7 +14,7 @@ function Home() {
 			</div>
 			<div className={style.rideRequestContainer}></div>
 			<div className={style.rideRequest}>
-				{/* location selector */}
+				<LocationSelector />
 				{/* confirm ride */}
 			</div>
 		</div>
@@ -20,8 +22,3 @@ function Home() {
 }
 
 export default Home;
-
-const style = {
-	wrapper: 'h-scren w-screen flex flex-col',
-	main: 'bg-red-500',
-};

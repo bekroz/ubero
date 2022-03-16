@@ -1,3 +1,3 @@
 export { Navbar } from './Navbar';
 export { Map } from './Map';
-export { RideRequest } from './RideRequest';
+export { RideRequest } from './Confirmation';
