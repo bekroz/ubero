@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import style from './style';
 
 function LocationSelector() {
 	const [inPickupFocus, setInPickupFocus] = useState(true);
-	const [pickupPoint, setPickupPoint] = useState('');
-	const [dropPoint, setDropPoint] = useState('');
+	const pickupInput = useRef();
+	const dropInput = useRef();
+
+	function onPickupChange(e) {
+		pickupInput.current = e.target.value;
+	}
+
+	function onDropChange(e) {
+		dropInput.current = e.target.value;
+	}
 	return (
 		<div className={style.wrapper}>
 			<div className={style.searchHeader}>
@@ -25,11 +33,11 @@ function LocationSelector() {
 						</svg>
 					</div>
 					<input
+						ref={pickupInput}
 						type='text'
 						className={style.input}
 						placeholder='Enter pickup location'
-						value={pickupPoint}
-						onChange={(e) => setPickupPoint(e.target.value)}
+						onChange={onPickupChange}
 						onFocus={() => setInPickupFocus(true)}
 					/>
 				</div>
@@ -48,11 +56,11 @@ function LocationSelector() {
 						</svg>
 					</div>
 					<input
+						ref={dropInput}
 						type='text'
 						className={style.input}
 						placeholder='Where are we going?'
-						value={dropPoint}
-						onChange={(e) => setDropPoint(e.target.value)}
+						onChange={onDropChange}
 						onFocus={() => setInPickupFocus(false)}
 					/>
 				</div>
