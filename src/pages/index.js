@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { Navbar } from '../components/Navbar';
+import { Navbar, Map } from '../components';
 
 function Home() {
 	return (
@@ -8,8 +8,7 @@ function Home() {
 			{/* navbar */}
 			<Navbar />
 			<div className={style.main}>
-				{/* map */}
-				<h1>Hello</h1>
+				<Map />
 			</div>
 			<div className={style.rideRequestContainer}></div>
 			<div className={style.rideRequest}>

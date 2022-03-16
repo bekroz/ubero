@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import style from './style';
 import avatar from '../../constants/images/avatar.png';
+import { BsPerson } from 'react-icons/bs';
 
 const currentWalletOwner = '0xD3912981mc3uyi213nd894XD';
 
@@ -30,7 +31,10 @@ function Navbar() {
 					{currentWalletOwner.slice(0, 6)}...{currentWalletOwner.slice(39)}
 				</div>
 			) : (
-				<div>Log In</div>
+				<div style={style.loginBtn}>
+					<BsPerson />
+					<span className={style.loginText}>Log In</span>
+				</div>
 			)}
 		</div>
 	);
