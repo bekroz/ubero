@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import style from './style';
 import mapboxGl from 'mapbox-gl';
 
-mapboxGl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
+mapboxGl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 function Map() {
 	useEffect(() => {
