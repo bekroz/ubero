@@ -1,23 +1,38 @@
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { carListData } from '../../constants/data';
-import ethLogo from '../../constants/images/eth.png';
+import ethLogo from '../../images/eth.png';
 import style from './style';
 
 function RideSelector() {
+	const [carList, setCarList] = useState([]);
+	const [chosenCar, setChosenCar] = useState(null);
+
 	async function onConfirm() {
 		console.log('Confirmed');
 	}
-
 	const basePrice = 482;
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const res = await fetch('/api/db/getRideTypes');
+				const data = await res.json();
+				setCarList(data.data);
+			} catch (error) {
+				console.error(error);
+			}
+		})();
+	}, []);
+
 	return (
 		<div className={style.wrapper}>
 			<div className={style.title}>Choose your ride or swipe up for more</div>
 			<div className={style.carList}>
-				{carListData.map(({ type, image, priceMultiplier }, index) => (
+				{carList.map(({ type, icon, priceMultiplier }, index) => (
 					<div className={style.car} key={index}>
 						<Image
 							alt='car'
-							src={image}
+							src={icon}
 							width={50}
 							height={50}
 							className={style.carImage}
