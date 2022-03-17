@@ -1,18 +1,20 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
+import { UberoContext } from '../../context';
 import style from './style';
 
 function LocationSelector() {
 	const [inPickupFocus, setInPickupFocus] = useState(true);
-	const pickupInput = useRef();
-	const dropInput = useRef();
+	const { pickup, setPickup, drop, setDrop } = useContext(UberoContext);
 
 	function onPickupChange(e) {
-		pickupInput.current = e.target.value;
+		setPickup(e.target.value);
 	}
 
 	function onDropChange(e) {
-		dropInput.current = e.target.value;
+		setDrop(e.target.value);
 	}
+	console.log(pickup);
+
 	return (
 		<div className={style.wrapper}>
 			<div className={style.searchHeader}>
@@ -33,7 +35,7 @@ function LocationSelector() {
 						</svg>
 					</div>
 					<input
-						ref={pickupInput}
+						value={pickup}
 						type='text'
 						className={style.input}
 						placeholder='Enter pickup location'
@@ -56,7 +58,7 @@ function LocationSelector() {
 						</svg>
 					</div>
 					<input
-						ref={dropInput}
+						value={drop}
 						type='text'
 						className={style.input}
 						placeholder='Where are we going?'

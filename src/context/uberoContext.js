@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect } from 'react';
 
-export const UberoContext = createContext();
+const UberoContext = createContext();
 
-export const UberProvider = ({ children }) => {
+const UberoProvider = ({ children }) => {
 	const createLocationCoordinatePromise = (locationName, locationType) => {
 		return new Promise(async (resolve, reject) => {
-			const res = await fetch('/api/map/getLocationCoordinates', {
+			const res = await fetch('api/map/getLocationCoordinates', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -15,6 +15,8 @@ export const UberProvider = ({ children }) => {
 					locationType,
 				}),
 			});
+
+			console.log(`RESPONSE:`, res);
 			const data = await res.json();
 			if (data.message === 'success') {
 				switch (locationType) {
@@ -47,5 +49,21 @@ export const UberProvider = ({ children }) => {
 		}
 	}, [pickup, drop]);
 
-	return <UberoContext.Provider value={}>{children}</UberoContext.Provider>;
+	return (
+		<UberoContext.Provider
+			value={{
+				pickup,
+				setPickup,
+				drop,
+				setDrop,
+				pickupPointCoordinates,
+				setPickupPointCoordinates,
+				dropPointCoordinates,
+				setDropPointCoordinates,
+			}}>
+			{children}
+		</UberoContext.Provider>
+	);
 };
+
+export { UberoContext, UberoProvider };

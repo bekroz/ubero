@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ethLogo from '../../images/eth.png';
 import style from './style';
+import { UberoContext } from '../../context';
 
 function RideSelector() {
 	const [carList, setCarList] = useState([]);
@@ -28,7 +29,7 @@ function RideSelector() {
 		<div className={style.wrapper}>
 			<div className={style.title}>Choose your ride or swipe up for more</div>
 			<div className={style.carList}>
-				{carList.map(({ type, icon, priceMultiplier }, index) => (
+				{carList?.map(({ type, icon, priceMultiplier }, index) => (
 					<div className={style.car} key={index}>
 						<Image
 							alt='car'
