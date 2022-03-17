@@ -13,7 +13,6 @@ function LocationSelector() {
 	function onDropChange(e) {
 		setDrop(e.target.value);
 	}
-	console.log(pickup);
 
 	return (
 		<div className={style.wrapper}>

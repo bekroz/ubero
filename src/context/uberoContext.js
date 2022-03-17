@@ -5,18 +5,16 @@ const UberoContext = createContext();
 const UberoProvider = ({ children }) => {
 	const createLocationCoordinatePromise = (locationName, locationType) => {
 		return new Promise(async (resolve, reject) => {
-			const res = await fetch('api/map/getLocationCoordinates', {
+			const res = await fetch('/api/map/getLocationCoordinates', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					locationName,
-					locationType,
+					location: locationName,
 				}),
 			});
 
-			console.log(`RESPONSE:`, res);
 			const data = await res.json();
 			if (data.message === 'success') {
 				switch (locationType) {
@@ -41,12 +39,12 @@ const UberoProvider = ({ children }) => {
 	useEffect(() => {
 		if (pickup && drop) {
 			(async () => {
-				await Promise.all([createLocationCoordinatePromise(pickup, 'pickup')]);
-				await Promise.all([createLocationCoordinatePromise(drop, 'drop')]);
+				await Promise.all([
+					createLocationCoordinatePromise(pickup, 'pickup'),
+					createLocationCoordinatePromise(drop, 'drop'),
+				]);
 			})();
-		} else {
-			return;
-		}
+		} else return;
 	}, [pickup, drop]);
 
 	return (
