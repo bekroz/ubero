@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import style from './style';
-import avatar from '../../constants/images/avatar.png';
+import avatar from '../../images/avatar.png';
 import { BsPerson } from 'react-icons/bs';
 
 const currentWalletOwner = '0xD3912981mc3uyi213nd894XD';
