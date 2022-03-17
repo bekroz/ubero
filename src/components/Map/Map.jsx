@@ -28,7 +28,7 @@ export default function Map() {
 				padding: 390,
 			});
 		}
-	}, []);
+	}, [pickupCoordinates, dropCoordinates]);
 
 	const addToMap = (map, coordinates) => {
 		const marker1 = new mapboxGl.Marker().setLngLat(coordinates).addTo(map);
