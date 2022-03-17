@@ -1,40 +1,15 @@
 import { createContext, useState, useEffect } from 'react';
+import createLocationCoordinatePromise from '../util/locationPromise';
 
 const UberoContext = createContext();
 
 const UberoProvider = ({ children }) => {
-	const createLocationCoordinatePromise = (locationName, locationType) => {
-		return new Promise(async (resolve, reject) => {
-			const res = await fetch('/api/map/getLocationCoordinates', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					location: locationName,
-				}),
-			});
-
-			const data = await res.json();
-			if (data.message === 'success') {
-				switch (locationType) {
-					case 'pickup':
-						setPickupPointCoordinates(data.data);
-						break;
-					case 'drop':
-						setDropPointCoordinates(data.data);
-				}
-				resolve();
-			} else {
-				reject();
-			}
-		});
-	};
-
 	const [pickup, setPickup] = useState('');
 	const [drop, setDrop] = useState('');
-	const [pickupPointCoordinates, setPickupPointCoordinates] = useState('');
-	const [dropPointCoordinates, setDropPointCoordinates] = useState('');
+	const [pickupCoordinates, setPickupCoordinates] = useState();
+	const [dropCoordinates, setDropCoordinates] = useState();
+	const [currentAccount, setCurrentAccount] = useState();
+
 
 	useEffect(() => {
 		if (pickup && drop) {
@@ -54,10 +29,10 @@ const UberoProvider = ({ children }) => {
 				setPickup,
 				drop,
 				setDrop,
-				pickupPointCoordinates,
-				setPickupPointCoordinates,
-				dropPointCoordinates,
-				setDropPointCoordinates,
+				pickupCoordinates,
+				setPickupCoordinates,
+				dropCoordinates,
+				setDropCoordinates,
 			}}>
 			{children}
 		</UberoContext.Provider>

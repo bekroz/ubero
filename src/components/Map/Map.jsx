@@ -7,23 +7,9 @@ import { useContext } from 'react';
 mapboxGl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function Map() {
-	const { pickupPointCoordinates, dropPointCoordinates } =
-		useContext(UberoContext);
+	const { pickupCoordinates, dropCoordinates } = useContext(UberoContext);
 
-	const drawCoordinates = (pickPoint, dropPoint, map) => {
-		if (pickPoint) {
-			addToMap(map, pickPoint);
-		}
-		if (dropPoint) {
-			addToMap(map, dropPoint);
-		}
-		if (pickPoint && dropPoint) {
-			map.fitBounds([dropPoint, pickPoint], {
-				padding: 60,
-			});
-		}
-	};
-
+	console.log(pickupCoordinates, dropCoordinates);
 	useEffect(() => {
 		const map = new mapboxGl.Map({
 			container: 'map',
@@ -31,11 +17,21 @@ export default function Map() {
 			center: [-99.29011, 39.39172],
 			zoom: 3,
 		});
-		drawCoordinates(pickupPointCoordinates, dropPointCoordinates, map);
+		if (pickupCoordinates) {
+			addToMap(map, pickupCoordinates);
+		}
+		if (dropCoordinates) {
+			addToMap(map, dropCoordinates);
+		}
+		if (pickupCoordinates && dropCoordinates) {
+			map.fitBounds([dropCoordinates, pickupCoordinates], {
+				padding: 390,
+			});
+		}
 	}, []);
 
 	const addToMap = (map, coordinates) => {
-		const firstPoint = new mapboxGl.Marker().setLngLat(coordinates).addTo(map);
+		const marker1 = new mapboxGl.Marker().setLngLat(coordinates).addTo(map);
 	};
 	return <div className={style.wrapper} id='map' />;
 }
