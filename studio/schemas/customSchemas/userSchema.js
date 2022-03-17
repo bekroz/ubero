@@ -14,9 +14,9 @@ const userSchema = {
 			title: 'Wallet Address',
 		},
 		{
-			name: 'profilePic',
+			name: 'profileImage',
 			type: 'image',
-			title: 'Profile Picture',
+			title: 'Profile Image',
 		},
 	],
 };

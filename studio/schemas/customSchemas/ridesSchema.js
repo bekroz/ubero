@@ -19,7 +19,7 @@ const ridesSchema = {
 			type: 'number',
 		},
 		{
-			name: 'Icon',
+			name: 'icon',
 			title: 'Icon',
 			type: 'image',
 		},

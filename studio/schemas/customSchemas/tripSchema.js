@@ -31,18 +31,8 @@ const tripSchema = {
 		{
 			name: 'passenger',
 			type: 'reference',
-			to: [
-				{
-					type: 'string',
-					name: 'passengerName',
-					title: 'Passenger Name',
-				},
-				{
-					name: 'userPic',
-					type: 'image',
-					title: 'User Image',
-				},
-			],
+			title: 'Passenger',
+			to: [{ type: 'users' }],
 		},
 	],
 };
