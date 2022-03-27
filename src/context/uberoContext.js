@@ -1,5 +1,8 @@
 import { createContext, useState, useEffect } from 'react';
-import createLocationCoordinatePromise from '../util/locationPromise';
+import {
+	createLocationCoordinatePromise,
+	checkWalletConnection,
+} from '../utils';
 
 const UberoContext = createContext();
 
@@ -9,7 +12,6 @@ const UberoProvider = ({ children }) => {
 	const [pickupCoordinates, setPickupCoordinates] = useState();
 	const [dropCoordinates, setDropCoordinates] = useState();
 	const [currentAccount, setCurrentAccount] = useState();
-
 
 	useEffect(() => {
 		if (pickup && drop) {
